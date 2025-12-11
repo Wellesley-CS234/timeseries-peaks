@@ -1,2 +1,2 @@
 # timeseries-peaks
-Dynamically finding peak finders in a time series
+Dynamically finding peaks in a time series and annotating them. 
