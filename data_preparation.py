@@ -19,8 +19,8 @@ def load_and_prepare_data():
     base_views = np.abs(1000 + np.linspace(0, 500, N) + 100 * np.sin(np.linspace(0, 4 * np.pi, N)) + np.random.normal(0, 50, N)).astype(int)
     df = pd.DataFrame({'Date': date_range, 'Total Views': base_views})
     
-    # Initialize 10 articles (A0 to A9)
-    article_cols = [f'Article A{i}' for i in range(10)]
+    # Initialize 10 articles (W0 to W9)
+    article_cols = [f'Article W{i}' for i in range(10)]
     
     # Distribute base views among 10 articles (roughly 10% each)
     for col in article_cols:
@@ -31,9 +31,9 @@ def load_and_prepare_data():
 
     # --- Inject Peaks Dynamically (Example Peaks) ---
     peaks_data = [
-        ('2024-03-15', 5000, 'Article A1'),
-        ('2024-09-01', 8000, 'Article A5'),
-        ('2025-05-20', 6000, 'Article A8')
+        ('2024-03-15', 5000, 'Article W1'),
+        ('2024-09-01', 8000, 'Article W5'),
+        ('2025-05-20', 6000, 'Article W8')
     ]
     # ... (inject_peak function remains the same, but using the new article names) ...
     
@@ -62,7 +62,7 @@ def load_and_prepare_data():
 
                 df.loc[df['Date'] == date, dominant_article] += dominant_spike
                 for article in non_dominant_articles:
-                    df.loc[df['Date'] == date, article] += other_spike
+                    df.loc[df['Date'] == date, article] += int(other_spike)
                 
                 # Recalculate total views for the day
                 df.loc[df['Date'] == date, 'Total Views'] = df.loc[df['Date'] == date, article_cols].sum(axis=1)
